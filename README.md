@@ -423,8 +423,52 @@ Hier bitte den Code aus `robots_exercise` in ein UML Diagramm überführen.
 
 ```text @plantUML
 @startuml
+class Program{
+    - const ROBOT_DATA_FOLDER : string
+    - const ROBOT_COUNT : int
+    - static readonly RandomGenerator : Random
+    - static readonly StandardTypen : string[]
+    - static Main(string[]) : void
+    - static InitialisiereZufaelligeRoboter(int) : List<Roboter>
+    - static ErzeugeZufaelligenRoboter(int) : Roboter
+    - static GibStatusAus(IEnumerable<Roboter>) : static
+    - static SpeichereAlleRoboter(IEnumerable<Roboter>, string) : void
+    - static RemoveExistingRobots(string) : void
+    - static LadeAlleCsvRoboter(string) : List<Roboter>
+    - static LadeAlleJsonRoboter(string) : List<Roboter>
+}
 
-Arbeiten Sie hier !!!
+interface ISerializer{
+    SpeichernAlsJSON(string) : void
+    LadenAusJSON(string) : Roboter
+    SpeichernAlsCSV(string) : void
+    LadenAusCSV(string) : Roboter
+}
+class Roboter{
+    + Roboter(string, string, int)
+    + Roboter()
+    + Name : string
+    + Typ : string
+    + Energielevel : int
+    + SpeichernAlsCSV() : void //
+    + LadenAusCSV(string) : Roboter
+    + SpeichernAlsJSON(string) : void
+    + SpeichernAlsJSON(string) : Roboter
+    + GetStatus() : string
+    + Activate() : void
+}
+class Lieferroboter{
+    + Lieferkapazität : int
+    + Lieferroboter()
+    + Lieferroboter(string, int, int)
+    + GetStatus() : string
+
+}
+
+
+ISerializer ..> Roboter
+
+Roboter --|> Lieferroboter
 
 @enduml
 ```
