@@ -1,4 +1,3 @@
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=24084838)
 <!--
 
 author:   Volker Göhler
@@ -20,7 +19,7 @@ tags: [ Sommersemester2026, Softwareentwicklung, Übung04]
 
 -->
 
-[![LiaScript Course](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/Ifi-Softwareentwicklung-SoSe2026/exercise_04/refs/heads/main/README.md)
+[![LiaScript Course](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/Ifi-Softwareentwicklung-SoSe2026/exercise-04-Githa-Bernstein/refs/heads/main/README.md)
 
 #  Aufgabe 04
 
@@ -423,8 +422,52 @@ Hier bitte den Code aus `robots_exercise` in ein UML Diagramm überführen.
 
 ```text @plantUML
 @startuml
+class Program{
+    - const ROBOT_DATA_FOLDER : string
+    - const ROBOT_COUNT : int
+    - static readonly RandomGenerator : Random
+    - static readonly StandardTypen : string[]
+    - static Main(string[]) : void
+    - static InitialisiereZufaelligeRoboter(int) : List<Roboter>
+    - static ErzeugeZufaelligenRoboter(int) : Roboter
+    - static GibStatusAus(IEnumerable<Roboter>) : static
+    - static SpeichereAlleRoboter(IEnumerable<Roboter>, string) : void
+    - static RemoveExistingRobots(string) : void
+    - static LadeAlleCsvRoboter(string) : List<Roboter>
+    - static LadeAlleJsonRoboter(string) : List<Roboter>
+}
 
-Arbeiten Sie hier !!!
+interface ISerializer{
+    SpeichernAlsJSON(string) : void
+    LadenAusJSON(string) : Roboter
+    SpeichernAlsCSV(string) : void
+    LadenAusCSV(string) : Roboter
+}
+class Roboter{
+    + Roboter(string, string, int)
+    + Roboter()
+    + Name : string
+    + Typ : string
+    + Energielevel : int
+    + SpeichernAlsCSV() : void //
+    + LadenAusCSV(string) : Roboter
+    + SpeichernAlsJSON(string) : void
+    + SpeichernAlsJSON(string) : Roboter
+    + GetStatus() : string
+    + Activate() : void
+}
+class Lieferroboter{
+    + Lieferkapazität : int
+    + Lieferroboter()
+    + Lieferroboter(string, int, int)
+    + GetStatus() : string
+
+}
+
+
+Roboter ..|> ISerializer 
+ 
+Lieferroboter --|> Roboter
 
 @enduml
 ```
