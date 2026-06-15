@@ -466,7 +466,7 @@ class Lieferroboter{
 
 
 Roboter ..|> ISerializer 
-
+ 
 Lieferroboter --|> Roboter
 
 @enduml
