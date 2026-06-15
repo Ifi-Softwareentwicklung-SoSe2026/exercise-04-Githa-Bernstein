@@ -466,9 +466,9 @@ class Lieferroboter{
 }
 
 
-ISerializer ..> Roboter
+ISerializer <|.. Roboter
 
-Roboter --|> Lieferroboter
+Roboter <|-- Lieferroboter
 
 @enduml
 ```
