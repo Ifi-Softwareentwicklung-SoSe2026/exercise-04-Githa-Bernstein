@@ -481,6 +481,7 @@ Lieferroboter --|> Roboter
 
 Hier soll das überarbeitete UML Diagramm zum Code in `robots_exercise` erstellt werden.
 
+Architektur-Begründung: Ich habe die Klasse Roboter nicht von der Persistenz getrennt, weil ich der Meinung bin, dass sich diese Aufteilung für ein so ein kleines Projekt nicht lohnt. Allerdings habe ich das Interface geteilt, um das Speichern bzw. das Auslesen mittels CDV und JSON voneinander zu trennen.
 
 ```text @plantUML
 @startuml
