@@ -439,10 +439,13 @@ class Program{
 
 interface ISerializer{
     SpeichernAlsJSON(string) : void
-    LadenAusJSON(string) : Roboter
+    abstract LadenAusJSON(string) : Roboter
     SpeichernAlsCSV(string) : void
-    LadenAusCSV(string) : Roboter
+    abstract LadenAusCSV(string) : Roboter
 }
+namespace RoboterDatenverwaltung;
+
+
 class Roboter{
     + Roboter(string, string, int)
     + Roboter()
@@ -452,18 +455,18 @@ class Roboter{
     + SpeichernAlsCSV() : void //
     + LadenAusCSV(string) : Roboter
     + SpeichernAlsJSON(string) : void
-    + SpeichernAlsJSON(string) : Roboter
-    + GetStatus() : string
-    + Activate() : void
+    + static LadenAusJSON(string) : Roboter
+    + virtual GetStatus() : string
+    + virtual Activate() : void
 }
+
 class Lieferroboter{
     + Lieferkapazität : int
     + Lieferroboter()
     + Lieferroboter(string, int, int)
-    + GetStatus() : string
+    + override GetStatus() : string
 
 }
-
 
 Roboter ..|> ISerializer 
  
@@ -482,7 +485,60 @@ Hier soll das überarbeitete UML Diagramm zum Code in `robots_exercise` erstellt
 ```text @plantUML
 @startuml
 
-Arbeiten Sie hier !!!
+package RoboterFirma{
+class Program{
+    - const ROBOT_DATA_FOLDER : string
+    - const ROBOT_COUNT : int
+    - static readonly RandomGenerator : Random
+    - static readonly StandardTypen : string[]
+    - static Main(string[]) : void
+    - static InitialisiereZufaelligeRoboter(int) : List<Roboter>
+    - static ErzeugeZufaelligenRoboter(int) : Roboter
+    - static GibStatusAus(IEnumerable<Roboter>) : static
+    - static SpeichereAlleRoboter(IEnumerable<Roboter>, string) : void
+    - static RemoveExistingRobots(string) : void
+    - static LadeAlleCsvRoboter(string) : List<Roboter>
+    - static LadeAlleJsonRoboter(string) : List<Roboter>
+}
+
+interface ISerializerJSON{
+    SpeichernAlsJSON(string) : void
+    abstract LadenAusJSON(string) : Roboter
+}
+interface ISerializerCSV{
+    SpeichernAlsCSV(string) : void
+    abstract LadenAusCSV(string) : Roboter
+}
+
+
+class Roboter{
+    + Roboter(string, string, int)
+    + Roboter()
+    + Name : string
+    + Typ : string
+    + Energielevel : int
+    + SpeichernAlsCSV() : void //
+    + LadenAusCSV(string) : Roboter
+    + SpeichernAlsJSON(string) : void
+    + static LadenAusJSON(string) : Roboter
+    + virtual GetStatus() : string
+    + virtual Activate() : void
+}
+
+class Lieferroboter{
+    + Lieferkapazität : int
+    + Lieferroboter()
+    + Lieferroboter(string, int, int)
+    + override GetStatus() : string
+
+}
+}
+
+Roboter ..|> ISerializerJSON
+Roboter ..|> ISerializerCSV
+
+ 
+Lieferroboter --|> Roboter
 
 @enduml
 ```
