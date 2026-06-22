@@ -20,6 +20,7 @@ interface ISerializer{
     SpeichernAlsCSV(string) : void
     LadenAusCSV(string) : Roboter
 }
+
 class Roboter{
     + Roboter(string, string, int)
     + Roboter()
@@ -47,7 +48,6 @@ ISerializer ..> Roboter
 Roboter --|> Lieferroboter
 
 @enduml
-
 
 
 
